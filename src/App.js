@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Route, Switch, Redirect } from "react-router-dom";
+import "./app.css";
+import Color from "./components/color";
+import Red from "./colors/red";
+import Green from "./colors/green";
+import Orange from "./colors/orange";
+import Form from "./components/form";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+ return (
+  <div className="container">
+   <Switch>
+    <Route path="/color/red" component={Red} />
+    <Route path="/color/green" component={Green} />
+    <Route path="/color/orange" component={Orange} />
+    <Route path="/color" exact component={Color} />
+    <Route path="/color/form" component={Form} />
+    <Redirect from="/" exact to="/color" />
+    <Redirect to="/color" />
+   </Switch>
+  </div>
+ );
+};
 
 export default App;
