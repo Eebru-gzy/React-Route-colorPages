@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 
 
-const Color = () => {
+const Color = ({pages}) => {
   return (
    <div>
     <header className="header">
@@ -15,13 +15,7 @@ const Color = () => {
     </header>
     <p style={{ padding: "10px" }}>Please Select a Color</p>
     <div>
-     <Link to="/color/red">Red</Link>
-    </div>
-    <div>
-     <Link to="/color/green">Green</Link>
-    </div>
-    <div>
-     <Link to="/color/orange">Orange</Link>
+      {pages.map(page => <div><Link key={page.name}to={page.link}>{page.name}</Link></div>)}
     </div>
    </div>
   );

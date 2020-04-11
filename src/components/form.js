@@ -6,7 +6,7 @@ const Form = ({history}) => (
   <div className="form-plate">
    <form>
     <h4>Select a Color</h4>
-    <div class="form-container">
+    <div className="form-container">
      <hr />
      <div>
       <div style={{ padding: "5px" }}>
