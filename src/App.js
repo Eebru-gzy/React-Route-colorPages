@@ -1,39 +1,58 @@
 import React, { Component } from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect, withRouter } from "react-router-dom";
 import "./app.css";
 import Color from "./components/color";
-import Red from "./colors/red";
-import Green from "./colors/green";
-import Orange from "./colors/orange";
 import Form from "./components/form";
+import FormColor from "./components/formColor";
 
+ const colorList = [
+  { name: "white", hex: '#fff' },
+  { name: "Gray", hex: '#ddd' },
+  { name: "Black", hex: '#000' },
+]
 class App extends Component {
   state = {
-    pages: [
-      { link: "/color/red", name: "Red", component: Red },
-      { link: "/color/green", name: "Green", component: Green },
-      { link: "/color/orange", name: "Orange", component: Orange },
-    ],
+    colorList: colorList
   };
+
+  handleChangeforTextField = ({target}) => {
+    this.setState({ formInputValue: target.value});
+  };
+
+  handleChangeforColorField = ({target}) => {
+    this.setState({ formColorValue: target.value});
+  };
+  
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const formValues = [{name:this.state.formInputValue, hex: this.state.formColorValue}]
+    const updateValues = formValues.concat(this.state.colorList)
+    this.setState({
+      colorList: updateValues
+    })
+    this.props.history.push('/color')
+  };
+
   render() {
-    const { pages } = this.state;
     return (
       <div className="container">
         <Switch>
-          {pages.map((page) => (
-            <Route
-              key={page.name}
-              path={page.link}
-              component={page.component}
-            />
-          ))}
-
           <Route
             path="/color"
             exact
-            component={() => <Color pages={pages} />}
+            component={() => <Color colorList={this.state.colorList}/>}
           />
-          <Route path="/color/form" component={Form} />
+          <Route path="/formColor/:color" component={FormColor} />
+          <Route
+            path="/color/form"
+            render={ () =>
+              <Form
+                handleSubmit={this.handleSubmit}
+                handleColorChange={this.handleChangeforColorField}
+                handleInputChange={this.handleChangeforTextField}
+              />
+            }
+          />
           <Redirect from="/" exact to="/color" />
           <Redirect to="/color" />
         </Switch>
@@ -42,4 +61,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);

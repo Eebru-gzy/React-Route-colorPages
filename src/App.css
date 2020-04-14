@@ -29,6 +29,11 @@ body{
   width: 100vw;
   background-color: orange;
 }
+.blue {
+  height: 100vh;
+  width: 100vw;
+  background-color: blue;
+}
 
 .form-page{
   background-image: linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet);
