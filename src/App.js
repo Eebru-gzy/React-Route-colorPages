@@ -8,8 +8,8 @@ import FormColor from "./components/formColor";
  const colorList = [
   { name: "white", hex: '#fff' },
   { name: "Gray", hex: '#ddd' },
-  { name: "Black", hex: '#000' },
-]
+  { name: "yellow", hex: '#ff0' },
+];
 class App extends Component {
   state = {
     colorList: colorList
